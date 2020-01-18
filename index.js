@@ -18,6 +18,17 @@ async function timeWait(i) {
     })
 }
 
+function printResult(deltas) {
+    const sum = deltas.reduce((sum, curr) => { return sum + curr })
+    const avg = sum / deltas.length
+    const min = Math.min(...deltas)
+    const max = Math.max(...deltas)
+    console.log(`Statistics after ${deltas.length} uploads`)
+    console.log(`Average:\t${avg}ms`)
+    console.log(`Minimum:\t${min}ms`)
+    console.log(`Maximum:\t${max}ms`)
+}
+
 async function main() {
     let deltas = []
     for (let i = 0; i < 500; i++) {
@@ -25,9 +36,7 @@ async function main() {
         deltas.push(p)
     }
 
-    const sum = deltas.reduce((sum, curr) => { return sum + curr }, 0)
-    const avg = sum / deltas.length
-    console.log(`Average Wait Time: ${avg}`)
+    printResult(deltas)
 }
 
 main()
